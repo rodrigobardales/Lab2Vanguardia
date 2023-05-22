@@ -1,0 +1,28 @@
+<h2>List of Contacts</h2>
+
+<app-filter [contacts]="contacts" (filteredContacts)="onFilter($event)"></app-filter>
+
+<table>
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <div class="results" *ngIf="filteredContacts.length > 0">
+        <tr *ngFor="let contact of filteredContacts">
+            <td>{{ contact.title }}</td>
+            <td (click)="selectContact(contact)">{{ contact.name }}</td>
+        </tr>
+    </div>
+    <div class="contacts" *ngIf="filteredContacts.length === 0">
+        <tr *ngFor="let contact of contacts">
+            <td>{{ contact.title }}</td>
+            <td (click)="selectContact(contact)">{{ contact.name }}</td>
+        </tr>
+    </div>
+  </tbody>
+</table>
+
+<button (click)="showForm()">Agregar Nuevo Contacto</button>

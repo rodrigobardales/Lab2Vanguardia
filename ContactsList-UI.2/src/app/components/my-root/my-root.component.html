@@ -1,0 +1,4 @@
+
+<app-list-contacts [contacts]="contacts" (contactSelected)="selectContact($event)" (toggleForm)="showAddContact = true"></app-list-contacts>
+<app-add-contact [contact]="contactToEdit" [mode]="contactToEdit ? 'edit' : 'add'" *ngIf="showAddContact || showEditContact" (contactAdded)="addContact($event)" (cancel)="showAddContact = false; showEditContact = false"></app-add-contact>
+<app-contact-detail *ngIf="selectedContact" [contact]="selectedContact" (deletedContact)="deleteContact()" (edittedContact)="editContact($event)"></app-contact-detail>

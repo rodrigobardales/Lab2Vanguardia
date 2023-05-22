@@ -1,0 +1,39 @@
+<h2>Agregar Nuevo Contacto</h2>
+
+<form  #myForm="ngForm" (ngSubmit)="saveContact()">
+  <div>
+    <label  for="name">Nombre:</label>
+    <input #name="ngModel" type="text" id="name" required minlength="3" [(ngModel)]="contact.name" name="name" minLength="3" required>
+    <div class="error" [hidden]="name.valid || name.pristine">
+        El nombre es requerido y debe tener mas de 3 caracteres
+    </div>
+  </div>
+  <div>
+    <label for="email">Correo:</label>
+    <input #email="ngModel" type="email" id="email" required [(ngModel)]="contact.email" [pattern]="emailPattern" name="email" required>
+    <div class="error" [hidden]="email.valid || email.pristine">
+        El correo es requerido y debe de usar una direccion de correo valida
+    </div>
+  </div>
+  <div>
+    <label for="phone">Numero telefonico:</label>
+    <input #phone="ngModel" type="text" id="phone" required [(ngModel)]="contact.phone" name="phone" required>
+    <div class="error" [hidden]="phone.valid || phone.pristine">
+        Favor ingresar su numero de telefono
+    </div>
+  </div>
+  <div>
+    <label for="title">Titulo:</label>
+    <select #title="ngModel" id="title" required [(ngModel)]="contact.title" name="title" required>
+      <option value="Sr.">Sr.</option>
+      <option value="Sra.">Sra.</option>
+      <option value="Otro">Otro</option>
+    </select>
+    <div class="error" [hidden]="title.valid || title.pristine">
+        Favor seleccionar un titulo
+    </div>
+  </div>
+
+  <button type="submit" *ngIf="mode !== 'edit'" [disabled]="myForm.invalid">Guardar</button>
+  <button type="button" (click)="cancelAddContact()">{{ mode === 'add' ?  'Cancelar' : 'Terminar'}}</button>
+</form>
